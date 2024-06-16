@@ -1,0 +1,59 @@
+/* resources/css/custom.css */
+
+body {
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    color: #333;
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.card-header {
+    background: #007bff;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    border-bottom: none;
+    padding: 20px 20px;
+}
+
+.card-header h4 {
+    margin: 0;
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+.form-control {
+    border-radius: 0.5rem;
+    border: 1px solid #ced4da;
+}
+
+.btn-primary {
+    background: #007bff;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background: #007bff;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+}
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.text-muted a {
+    color: #007bff;
+}
+
+.text-muted a:hover {
+    color: #0056b3;
+    text-decoration: none;
+}
