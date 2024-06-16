@@ -11,11 +11,12 @@ use App\Http\Controllers\KonselorController;
 |--------------------------------------------------------------------------
 */
 
-Route::get('/', [AuthController::class, 'login'])->name('login.index');
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
@@ -26,10 +27,10 @@ Route::post('/register', [AuthController::class, 'register'])->name('register.po
 
 // Dashboard route
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
+    Route::get('/bkc/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
 });
 
 // Konselor dashboard route
 Route::middleware(['auth', 'role.konselor'])->group(function () {
-    Route::get('/konselor/dashboard', [KonselorController::class, 'dashboard'])->name('konselor.dashboard');
+    Route::get('dashboard', [KonselorController::class, 'dashboard'])->name('konselor.dashboard');
 });
