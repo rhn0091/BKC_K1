@@ -1,34 +1,41 @@
-<?php
+// app/Http/Controllers/ProfileController.php
+
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Spesialis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
-    public function index()
+    public function show()
     {
-        $user = auth()->user();
-        $spesialis = $user->role === 'konselor' ? Spesialis::all() : [];
-        return view('profile', compact('user', 'spesialis'));
+        $user = Auth::user();
+        return view('profile', compact('user'));
+    }
+
+    public function edit($id)
+    {
+        $user = User::findOrFail($id);
+        return view('profile-edit', compact('user'));
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name'       => 'required|string|min:2|max:100',
-            'email'      => 'required|email|unique:users,email,' . $id . ',id',
+            'name' => 'equired|string',
+            'email' => 'equired|string|email|unique:users,email,'.$id,
             'old_password' => 'nullable|string',
-            'password' => 'nullable|required_with:old_password|string|confirmed|min:6'
+            'password' => 'nullable|string|confirmed',
+            'photo' => 'nullable|image|max:2048',
+            'pesialisasi' => 'nullable|string',
         ]);
 
         $user = User::find($id);
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->spesialisasi = $request->spesialisasi;
 
         if ($request->filled('old_password')) {
             if (!Hash::check($request->old_password, $user->password)) {
@@ -41,8 +48,8 @@ class ProfileController extends Controller
         }
 
         if ($request->hasFile('photo')) {
-            if ($user->photo && file_exists(storage_path('app/public/photos/' . $user->photo))) {
-                Storage::delete('public/photos/' . $user->photo);
+            if ($user->photo && file_exists(storage_path('app/public/photos/'. $user->photo))) {
+                Storage::delete('public/photos/'. $user->photo);
             }
 
             $file = $request->file('photo');
