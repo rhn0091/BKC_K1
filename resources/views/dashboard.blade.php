@@ -11,7 +11,6 @@
 
                     <div class="card-body">
                         <p>Selamat datang, {{ Auth::user()->name }}!</p>
-                        <p>You are logged in!</p>
                     </div>
                 </div>
             </div>

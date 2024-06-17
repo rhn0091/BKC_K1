@@ -10,7 +10,7 @@
                     <div class="card-header">Konselor Dashboard</div>
 
                     <div class="card-body">
-                        <p>Selamat datang, {{ Auth::user()->name }}!</p>
+                        <p>Turut Berduka Cita, {{ Auth::user()->name }}!</p>
                     </div>
                 </div>
             </div>
