@@ -1,12 +1,12 @@
 <?php
 
-// app/Http/Controllers/ProfileController.php
-
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage; // Tambahkan ini
 
 class ProfileController extends Controller
 {
@@ -30,31 +30,37 @@ class ProfileController extends Controller
             'old_password' => 'nullable|string',
             'password' => 'nullable|string|confirmed',
             'photo' => 'nullable|image|max:2048',
-            'spesialisasi' => 'nullable|string',
+            'spesialisasi' => 'nullable|string', // Perbaiki ejaan di sini
         ]);
 
-        $user = User::findOrFail($id);
+        $user = User::find($id);
         $user->name = $request->name;
         $user->email = $request->email;
         $user->spesialisasi = $request->spesialisasi;
 
         if ($request->filled('old_password')) {
-            if ($request->old_password === $user->password) {
-                $user->password = $request->password;
-            } else {
-                return back()->withErrors(['old_password' => 'The old password is incorrect']);
+            if (!Hash::check($request->old_password, $user->password)) {
+                return back()
+                    ->withErrors(['old_password' => __('Please enter the correct password')])
+                    ->withInput();
             }
+
+            $user->password = Hash::make($request->password);
         }
 
         if ($request->hasFile('photo')) {
+            if ($user->photo && file_exists(storage_path('app/public/photos/' . $user->photo))) {
+                Storage::delete('public/photos/' . $user->photo);
+            }
+
             $file = $request->file('photo');
-            $path = $file->store('photos', 'public');
-            $user->photo = $path;
+            $fileName = $file->hashName();
+            $file->storeAs('public/photos', $fileName);
+            $user->photo = $fileName;
         }
 
         $user->save();
 
-        return redirect()->route('profile')->with('status', 'Profile updated successfully');
+        return back()->with('status', 'Profile updated!');
     }
 }
-

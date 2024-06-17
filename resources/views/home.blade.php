@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    {{ __('Web Bimbingan Konseling') }}
+                    {{ __('Selamat Datang ') }}
                 </div>
             </div>
         </div>

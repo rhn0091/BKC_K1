@@ -20,6 +20,8 @@ class User extends Authenticatable
         'role',
         'photo',
         'spesialisasi',
+
+        
     ];
 
     protected $hidden = [
@@ -35,5 +37,6 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
 
 }

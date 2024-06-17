@@ -24,7 +24,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             @if ($user->photo)
-                                <img src="{{ asset('storage/' . $user->photo) }}" class="img-thumbnail rounded mx-auto d-block" alt="{{ __('Profile Photo') }}">
+                                <img src="{{ asset('storage/photos/' . $user->photo) }}" class="img-thumbnail rounded mx-auto d-block" alt="{{ __('Profile Photo') }}">
                             @else
                                 <img src="{{ asset('img/profile.png') }}" class="img-thumbnail rounded mx-auto d-block" alt="{{ __('Profile Photo') }}">
                             @endif
@@ -49,7 +49,6 @@
                             <a href="{{ route('profile.edit', $user->id) }}" class="btn btn-primary">{{ __('Edit Profile') }}</a>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
