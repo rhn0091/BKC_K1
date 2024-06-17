@@ -1,4 +1,4 @@
-// app/Http/Controllers/ProfileController.php
+<?php
 
 namespace App\Http\Controllers;
 
@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage; // Tambahkan ini
 
 class ProfileController extends Controller
 {
@@ -24,12 +25,12 @@ class ProfileController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'equired|string',
-            'email' => 'equired|string|email|unique:users,email,'.$id,
+            'name' => 'required|string',
+            'email' => 'required|string|email|unique:users,email,'.$id,
             'old_password' => 'nullable|string',
             'password' => 'nullable|string|confirmed',
             'photo' => 'nullable|image|max:2048',
-            'pesialisasi' => 'nullable|string',
+            'spesialisasi' => 'nullable|string', // Perbaiki ejaan di sini
         ]);
 
         $user = User::find($id);
@@ -48,8 +49,8 @@ class ProfileController extends Controller
         }
 
         if ($request->hasFile('photo')) {
-            if ($user->photo && file_exists(storage_path('app/public/photos/'. $user->photo))) {
-                Storage::delete('public/photos/'. $user->photo);
+            if ($user->photo && file_exists(storage_path('app/public/photos/' . $user->photo))) {
+                Storage::delete('public/photos/' . $user->photo);
             }
 
             $file = $request->file('photo');

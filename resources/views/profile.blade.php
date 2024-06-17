@@ -1,65 +1,57 @@
-// app/Http/Controllers/ProfileController.php
+@extends('layouts.app')
 
-namespace App\Http\Controllers;
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Profile') }}</div>
 
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+                <div class="card-body">
+                    @if (auth()->user()->role == 'user')
+                        <a href="{{ route('dashboard') }}" class="btn btn-secondary mb-2">{{ __('Kembali ke laman Dashboard') }}</a>
+                    @elseif (auth()->user()->role == 'konselor')
+                        <a href="{{ route('konselor.dashboard') }}" class="btn btn-secondary mb-2">{{ __('Kembali ke laman Dashboard') }}</a>
+                    @endif
 
-class ProfileController extends Controller
-{
-    public function show()
-    {
-        $user = Auth::user();
-        return view('profile', compact('user'));
-    }
+                    @if (session('status'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('status') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
 
-    public function edit($id)
-    {
-        $user = User::findOrFail($id);
-        return view('profile-edit', compact('user'));
-    }
-
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|string|email|unique:users,email,'.$id,
-            'old_password' => 'nullable|string',
-            'password' => 'nullable|string|confirmed',
-            'photo' => 'nullable|image|max:2048',
-            'spesialisasi' => 'nullable|string',
-        ]);
-
-        $user = User::find($id);
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->spesialisasi = $request->spesialisasi;
-
-        if ($request->filled('old_password')) {
-            if (!Hash::check($request->old_password, $user->password)) {
-                return back()
-                    ->withErrors(['old_password' => __('Please enter the correct password')])
-                    ->withInput();
-            }
-
-            $user->password = Hash::make($request->password);
-        }
-
-        if ($request->hasFile('photo')) {
-            if ($user->photo && file_exists(storage_path('app/public/photos/' . $user->photo))) {
-                Storage::delete('public/photos/' . $user->photo);
-            }
-
-            $file = $request->file('photo');
-            $fileName = $file->hashName();
-            $file->storeAs('public/photos', $fileName);
-            $user->photo = $fileName;
-        }
-
-        $user->save();
-
-        return back()->with('status', 'Profile updated!');
-    }
-}
+                    <div class="row">
+                        <div class="col-md-4">
+                            @if ($user->photo)
+                                <img src="{{ asset('storage/photos/' . $user->photo) }}" class="img-thumbnail rounded mx-auto d-block" alt="{{ __('Profile Photo') }}">
+                            @else
+                                <img src="{{ asset('img/profile.png') }}" class="img-thumbnail rounded mx-auto d-block" alt="{{ __('Profile Photo') }}">
+                            @endif
+                        </div>
+                        <div class="col-md-8">
+                            <table class="table">
+                                <tr>
+                                    <th>{{ __('Name') }}</th>
+                                    <td>{{ $user->name }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ __('Email Address') }}</th>
+                                    <td>{{ $user->email }}</td>
+                                </tr>
+                                @if (auth()->user()->role != 'user')
+                                    <tr>
+                                        <th>{{ __('Spesialisasi') }}</th>
+                                        <td>{{ $user->spesialisasi }}</td>
+                                    </tr>
+                                @endif
+                            </table>
+                            <a href="{{ route('profile.edit', $user->id) }}" class="btn btn-primary">{{ __('Edit Profile') }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

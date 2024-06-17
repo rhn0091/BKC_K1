@@ -22,7 +22,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             @if($user->photo)
-                                <img src="{{ asset('storage/'.$user->photo) }}" class="img-thumbnail rounded mx-auto d-block">
+                                <img src="{{ asset('storage/photos/'.$user->photo) }}" class="img-thumbnail rounded mx-auto d-block">
                             @else
                                 <img src="{{ asset('img/profile.png') }}" class="img-thumbnail rounded mx-auto d-block">
                             @endif
