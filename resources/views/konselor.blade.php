@@ -10,7 +10,7 @@
                     <div class="card-header">Konselor Dashboard</div>
 
                     <div class="card-body">
-                        <p>berubah, {{ Auth::user()->name }}!</p>
+                        <p>berubah lagi, {{ Auth::user()->name }}!</p>
                     </div>
                 </div>
             </div>
