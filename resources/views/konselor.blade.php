@@ -42,6 +42,8 @@
                             <button class="btn btn-sm btn-outline-secondary">Action</button>
                             <button class="btn btn-sm btn-outline-secondary">Action</button>
                         </div>
+                    <div class="card-body">
+                        <p>berubah lagi, {{ Auth::user()->name }}!</p>
                     </div>
                 </div>
 

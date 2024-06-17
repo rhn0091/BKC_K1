@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KonselorController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -12,8 +14,10 @@ use App\Http\Controllers\KonselorController;
 */
 
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/ ', [HomeController::class, 'index'])->name('home');
 
+Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
+Route::patch('/profile/{id}', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
 Auth::routes();
 
 
@@ -21,6 +25,9 @@ Auth::routes();
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+
+
 
 Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register', [AuthController::class, 'register'])->name('register.post');

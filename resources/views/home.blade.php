@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    {{ __('Web Bimbimngan Konseling') }}
+                    {{ __('Web Bimbingan Konseling') }}
                 </div>
             </div>
         </div>

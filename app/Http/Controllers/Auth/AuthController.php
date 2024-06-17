@@ -17,7 +17,7 @@ class AuthController extends Controller
 
         $credentials = $request->only(['email', 'password']);
 
-        // Manually verify the credentials since passwords are stored in plain text
+
         $user = User::where('email', $credentials['email'])->first();
         if ($user && $user->password === $credentials['password']) {
             Auth::login($user);
