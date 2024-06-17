@@ -10,11 +10,6 @@
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('konselor.dashboard') }}">
-                            Konselor Dashboard
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="#">
                             Konseling
                         </a>
