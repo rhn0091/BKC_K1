@@ -7,6 +7,7 @@ use App\Models\User;
 
 class DashboardController extends Controller
 {
+    
     public function index(Request $request)
     {
         $query = User::where('role', 'konselor');
