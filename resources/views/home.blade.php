@@ -16,7 +16,7 @@
 
                     <h1>{{ __('Web Bimbingan Konseling Terbaik') }}</h1>
                     <p>Selamat datang di aplikasi web bimbingan konseling terbaik. Di sini, Anda dapat menemukan sumber daya dan dukungan yang Anda perlukan.</p>
-                    <a href="#" class="btn btn-primary mt-3">Get Started</a>
+                    <a href="{{ route('login') }}" class="btn btn-primary mt-3">Get Started</a>
                 </div>
             </div>
         </div>
