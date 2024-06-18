@@ -23,6 +23,7 @@ Route::get('/ ', [HomeController::class, 'index'])->name('home');
 // Route untuk halaman profil
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
+
     Route::get('/profile/edit/{id}', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
 });
@@ -43,4 +44,6 @@ Route::post('/register', [AuthController::class, 'register'])->name('register.po
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
     Route::get('/konselor/dashboard', [KonselorController::class, 'dashboard'])->name('konselor.dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
+
 });
