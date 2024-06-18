@@ -11,6 +11,26 @@
                         <p>Selamat datang, {{ Auth::user()->name }}!</p>
 
                         <h3>Daftar Konselor</h3>
+
+                        <!-- Formulir Pencarian -->
+                        <form method="GET" action="{{ route('dashboard') }}">
+                            <div class="form-group">
+                                <input type="text" name="search" class="form-control" placeholder="Cari konselor..." value="{{ request('search') }}">
+                            </div>
+                            <div class="form-group">
+                                <select name="spesialisasi" class="form-control">
+                                    <option value="">Semua Spesialisasi</option>
+                                    @foreach($spesialisasis as $spesialisasi)
+                                        <option value="{{ $spesialisasi }}" {{ request('spesialisasi') == $spesialisasi ? 'selected' : '' }}>
+                                            {{ $spesialisasi }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Cari</button>
+                        </form>
+                        <br>
+
                         @if($konselors->isEmpty())
                             <p>Tidak ada konselor ditemukan.</p>
                         @else
@@ -19,7 +39,7 @@
                                     <tr>
                                         <th>Nama</th>
                                         <th>Email</th>
-                                        <th>Spesialis</th>
+                                        <th>Spesialisasi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
