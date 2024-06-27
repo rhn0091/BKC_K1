@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-10">
@@ -47,16 +46,16 @@
                                     <thead>
                                         <tr>
                                             <th>Nama</th>
-                                            <th>Email</th>
                                             <th>Spesialis</th>
+                                            <th>Profil</th> <!-- Ditambahkan tautan profil -->
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach($konselors as $konselor)
                                             <tr>
                                                 <td>{{ $konselor->name }}</td>
-                                                <td>{{ $konselor->email }}</td>
-                                                <td>{{ $konselor->spesialisasi }}</td>
+                                                <td>{{ $konselor->spesialis }}</td>
+                                                <td><a href="{{ route('konselor.profile', $konselor->id) }}" class="btn btn-sm btn-primary">Lihat Profil</a></td>
                                             </tr>
                                         @endforeach
                                     </tbody>

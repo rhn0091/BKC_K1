@@ -93,7 +93,7 @@
                                         <input id="photo" type="file" class="form-control" name="photo">
                                     </div>
                                 </div>
-                                @if(auth()->user()->role != 'user')
+                                {{-- @if(auth()->user()->role != 'user')
                                 <div class="mb-3 row">
                                     <label for="spesialisasi" class="col-md-4 col-form-label text-md-end">{{ __('Spesialisasi') }}</label>
                                     <div class="col-md-6">
@@ -105,7 +105,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                @endif
+                                @endif --}}
                                 <div class="row mb-0">
                                     <div class="col-md-6 offset-md-4">
                                         <button type="submit" class="btn btn-primary">

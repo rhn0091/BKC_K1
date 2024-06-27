@@ -43,8 +43,8 @@
                                 </tr>
                                 @if (auth()->user()->role != 'user')
                                     <tr>
-                                        <th>{{ __('Spesialisasi') }}</th>
-                                        <td>{{ $user->spesialisasi }}</td>
+                                        <th>{{ __('Spesialis') }}</th>
+                                        <td>{{ $user->spesialis }}</td>
                                     </tr>
                                 @endif
                             </table>

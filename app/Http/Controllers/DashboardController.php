@@ -18,25 +18,25 @@ class DashboardController extends Controller
             $query->where(function($q) use ($search) {
                 $q->where('name', 'LIKE', "%{$search}%")
                   ->orWhere('email', 'LIKE', "%{$search}%")
-                  ->orWhere('spesialisasi', 'LIKE', "%{$search}%");
+                  ->orWhere('spesialis', 'LIKE', "%{$search}%");
             });
         }
 
-        // Jika ada filter spesialisasi, tambahkan ke query
-        if ($request->has('spesialisasi') && $request->input('spesialisasi') != '') {
-            $query->where('spesialisasi', $request->input('spesialisasi'));
+        // Jika ada filter spesialis, tambahkan ke query
+        if ($request->has('spesialis') && $request->input('spesialis') != '') {
+            $query->where('spesialis', $request->input('spesialis'));
         }
 
         // Ambil hasil pencarian dan filter
         $konselors = $query->get();
 
-        // Ambil semua spesialisasi untuk dropdown filter
+        // Ambil semua spesialis untuk dropdown filter
         $spesialisasis = User::where('role', 'konselor')
-                            ->select('spesialisasi')
+                            ->select('spesialis')
                             ->distinct()
-                            ->pluck('spesialisasi');
+                            ->pluck('spesialis');
 
-        // Mengirim data konselor dan spesialisasi ke view
+        // Mengirim data konselor dan spesialis ke view
         return view('dashboard', ['konselors' => $konselors, 'spesialisasis' => $spesialisasis]);
     }
 }

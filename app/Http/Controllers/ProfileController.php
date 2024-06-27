@@ -30,13 +30,13 @@ class ProfileController extends Controller
             'old_password' => 'nullable|string',
             'password' => 'nullable|string|confirmed',
             'photo' => 'nullable|image|max:2048',
-            'spesialisasi' => 'nullable|string', // Perbaiki ejaan di sini
+            'spesialis' => 'nullable|string', // Perbaiki ejaan di sini
         ]);
 
         $user = User::find($id);
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->spesialisasi = $request->spesialisasi;
+        $user->spesialis = $request->spesialis;
 
         if ($request->filled('old_password')) {
             if (!Hash::check($request->old_password, $user->password)) {

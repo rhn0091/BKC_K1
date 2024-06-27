@@ -16,7 +16,7 @@
             <a href="#" class="beranda">Beranda</a>
             <a href="#" class="tentang-kami">Tentang Kami</a>
             <div class="button-1">
-                <a href="#" class="kontak">Kontak</a>
+                <a href="{{ route('kontak') }}" class="kontak">Kontak</a>
             </div>
         </div>
     </div>
@@ -29,7 +29,7 @@
                 Bimbingan dan Konseling di Sekolah. BKC menyediakan banyak fitur
                 yang akan menjadi alat bantu Konselor Sekolah/Guru Bimbingan dan Konseling.
             </p>
-            <a href="#" class="button daftar-sekarang">Daftar Sekarang!</a>
+            <a href="{{ route('login') }}" class="button daftar-sekarang" >Daftar Sekarang!</a>
         </div>
         <div class="image-8">
             <img src="{{ asset('assets/images/image_2.png') }}" alt="Image">
