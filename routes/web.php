@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KonselorController;
 use App\Http\Controllers\KontakController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/kontak', [KontakController::class, 'index'])->name('kontak');
 
