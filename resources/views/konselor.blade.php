@@ -1,3 +1,4 @@
+<!-- resources/views/konselor.blade.php -->
 @extends('layouts.app')
 
 @section('content')
@@ -52,6 +53,9 @@
                         <div class="card-body">
                             <p>Anda login sebagai konselor.</p>
                             <p>Ini adalah halaman dashboard untuk konselor.</p>
+
+                            <!-- Tambahkan link ke halaman janji -->
+                            <a href="{{ route('appointments.index') }}" class="btn btn-success mt-3">Lihat Janji</a>
                         </div>
                     </div>
                 </div>
