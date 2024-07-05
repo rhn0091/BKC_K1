@@ -17,15 +17,26 @@
                             @endif
                         </div>
                         <div class="col-md-8">
-                            <h3>{{ $konselor->name }}</h3>
-                            <p>{{ $konselor->email }}</p>
-                            <p>{{ $konselor->spesialis }}</p>
-                            <!-- Tambahkan informasi lain tentang konselor sesuai kebutuhan -->
+                            <table class="table">
+                                <tr>
+                                    <th style="width: 30%;">{{ __('Nama') }}</th>
+                                    <td>{{ $konselor->name }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ __('Email') }}</th>
+                                    <td>{{ $konselor->email }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ __('Spesialis') }}</th>
+                                    <td>{{ $konselor->spesialis }}</td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                     <div class="row mt-4">
                         <div class="col-md-12">
                             <a href="{{ route('dashboard') }}" class="btn btn-secondary">{{ __('Kembali ke Dashboard') }}</a>
+                            <a href="{{ route('chat', $konselor->id) }}" class="btn btn-primary">{{ __('Chat dengan Konselor') }}</a>
                         </div>
                     </div>
                 </div>
